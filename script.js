@@ -30,11 +30,23 @@ function displayNextQuote() {
     currentQuote = shuffledQuotes[currentQuoteIndex];
     quoteElement.textContent = currentQuote.text;
     feedbackElement.classList.add('hidden');
+
+    // Re-enable buttons for the new quote
+    yesButton.disabled = false;
+    noButton.disabled = false;
+    yesButton.classList.remove('opacity-50');
+    noButton.classList.remove('opacity-50');
 }
 
 function checkAnswer(userAnswer) {
     const isCorrect = userAnswer === currentQuote.authentic;
     
+    // Disable buttons after answer
+    yesButton.disabled = true;
+    noButton.disabled = true;
+    yesButton.classList.add('opacity-50');
+    noButton.classList.add('opacity-50');
+
     if (isCorrect) {
         feedbackTextElement.textContent = `Correct! This quote is from ${currentQuote.source}.`;
         feedbackElement.classList.remove('hidden');
